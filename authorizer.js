@@ -4,7 +4,7 @@ var jwt = require('jsonwebtoken');
 var request = require('request'); 
 var jwkToPem = require('jwk-to-pem');
 
-var userPoolId = 'us-east-2_vuVDRReyU';
+var userPoolId = 'us-east-2_XpXHG58PN';
 var region = 'us-east-2'; //e.g. us-east-1
 var iss = 'https://cognito-idp.' + region + '.amazonaws.com/' + userPoolId;
 var pems;
@@ -44,8 +44,7 @@ exports.handler = function(event, context) {
 };
 
 function ValidateToken(pems, event, context) {
-     
-    var token = event.authorizationToken;
+    var token = event.queryStringParameters.token;
     //Fail if the token is not jwt
     var decodedJwt = jwt.decode(token, {complete: true});
     if (!decodedJwt) {
