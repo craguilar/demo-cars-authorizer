@@ -4,10 +4,8 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "master" branch
+  # Triggers the workflow on push only for the "master" branch
   push:
-    branches: [ "master" ]
-  pull_request:
     branches: [ "master" ]
 
   # Allows you to run this workflow manually from the Actions tab
@@ -24,13 +22,23 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
+      - uses: actions/setup-node@v2 
+        with:  
+          node-version: '16'
+      - name: Configure AWS Credentials  
+        uses: aws-actions/configure-aws-credentials@v1 #--> Setup the Credential for the AWS cli
+        with:
+        # Created the Secrets Under the Repo only with These Variables
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }} 
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2 
       # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Build
+        env:
+          CI: true
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          npm ci 
+      - name: Package and Deploy
+        run: |
+          zip -j lambda.zip ./*
+          aws lambda update-function-code --function-name=democars-lambda-authorizer-2 --zip-file=fileb://lambda.zip 
