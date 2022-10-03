@@ -1,0 +1,24 @@
+{
+  "name": "demo-cars-lambda-authorizer",
+  "version": "1.0.0",
+  "description": "AWS Lambda Authorizer v1",
+  "main": "authorizer.js",
+  "dependencies": {
+    "jsonwebtoken": "^7.0.0",
+    "jwk-to-pem": "^1.2.5",
+    "request": "^2.72.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/craguilar/demo-cars-lambda.git"
+  },
+  "author": "Carlos Ruiz",
+  "bugs": {
+    "url": "https://github.com/craguilar/demo-cars-lambda/issues"
+  },
+  "homepage": "https://github.com/craguilar/demo-cars-lambda#readme"
+}
