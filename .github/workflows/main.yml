@@ -39,5 +39,5 @@ jobs:
           npm ci 
       - name: Package and Deploy
         run: |
-          zip -rj lambda.zip ./*
+          zip -r lambda.zip ./*
           aws lambda update-function-code --function-name=democars-lambda-authorizer-2 --zip-file=fileb://lambda.zip 
