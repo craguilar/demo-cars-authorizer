@@ -1,6 +1,6 @@
 # Lambda Authorizer v1
 
-This is a Lambda Authorizer writen 
+This is a Lambda Authorizer writen in JavaScript using node .
 
 ## Deployment
 
